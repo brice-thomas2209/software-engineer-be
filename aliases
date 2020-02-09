@@ -1,0 +1,45 @@
+alias ..="cd .."
+alias ...="cd ../.."
+
+alias h='cd ~'
+alias c='clear'
+alias art=artisan
+
+alias phpspec='vendor/bin/phpspec'
+alias phpunit='vendor/bin/phpunit'
+alias serve=serve-laravel
+
+alias xoff='sudo phpdismod -s cli xdebug'
+alias xon='sudo phpenmod -s cli xdebug'
+
+alias pu='vendor/bin/phpunit'
+alias puf='vendor/bin/phpunit --filter'
+alias cda='composer dump-autoload'
+alias at='artisan tinker'
+alias amfms='artisan migrate:fresh && artisan module:seed && artisan passport:client --password'
+
+alias paraput='vendor/bin/paratest -p32 --runner SqliteRunner tests/'
+alias paraputmodules='vendor/bin/paratest -p32 --runner SqliteRunner Modules/'
+
+function artisan() {
+    php artisan "$@"
+}
+
+function xphp() {
+    (php -m | grep -q xdebug)
+    if [[ $? -eq 0 ]]
+    then
+        XDEBUG_ENABLED=true
+    else
+        XDEBUG_ENABLED=false
+    fi
+
+    if ! $XDEBUG_ENABLED; then xon; fi
+
+    php \
+        -dxdebug.remote_host=192.168.10.1 \
+        -dxdebug.remote_autostart=1 \
+        "$@"
+
+    if ! $XDEBUG_ENABLED; then xoff; fi
+}
