@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Passport\UserRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Override Laravel Passports UserRepository with our one that can utilise different guards.
+        app()->bind(\Laravel\Passport\Bridge\UserRepository::class, function () {
+            return app()->make(UserRepository::class);
+        });
     }
 }

@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user-api',
         'passwords' => 'users',
     ],
 
@@ -36,15 +36,9 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
+        'user-api' => [
+            'driver' => 'passport',
             'provider' => 'users',
-        ],
-
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
         ],
     ],
 
@@ -113,5 +107,10 @@ return [
     */
 
     'password_timeout' => 10800,
-
+    'oauth' => [
+        'client' => [
+            'id' => env('OAUTH_CLIENT', 2),
+            'secret' => env('OAUTH_SECRET', ''),
+        ],
+    ],
 ];
