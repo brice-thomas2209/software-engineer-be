@@ -1,0 +1,4 @@
+﻿id,name,units,is_numeric,num_decimal_places
+1,max_Bld_Height_m,m,TRUE,1
+2,min_lot_size_m2,m2,FALSE,0
+3,fsr,:1,TRUE,2

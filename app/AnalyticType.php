@@ -18,6 +18,6 @@ class AnalyticType extends Model
      */
     public function properties(): BelongsToMany
     {
-        return $this->belongsToMany(Property::class);
+        return $this->belongsToMany(Property::class, 'property_analytics');
     }
 }
